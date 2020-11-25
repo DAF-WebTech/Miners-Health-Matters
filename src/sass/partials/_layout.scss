@@ -1,0 +1,1035 @@
+/**
+ * LAYOUT
+ * Table of contents: Navigate using $TITLE
+ *
+ * globals
+ * pre-header
+ * pre-header - no hero varation
+ * header
+ * header - transparent variation
+ * header - no hero variation
+ * main
+ * prefooter
+ * footer
+ *
+ */
+
+
+
+
+
+/*------------------------------------**
+  $GLOBALS
+**------------------------------------*/
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body.lightbox-open {
+  overflow: hidden;
+}
+
+body:before {
+  position: fixed;
+  bottom: 0;
+  left: calc(50% - 1px);
+  top: 0;
+  z-index: -1;
+  border-right: 1px solid $black;
+  display: block;
+  height: 100%;
+  width: 1px;
+  content: '';
+}
+
+.container {
+  @include container;
+}
+
+img {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.visually-hidden {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+}
+
+svg,
+svg * {
+  @include transition(fill);
+}
+
+:focus {
+  outline: 3px solid $accent;
+}
+
+/* allows fixed header to work on anchor links */
+
+.anchor {
+  display: block;
+  position: relative;
+  top: -12rem;
+  visibility: hidden;
+}
+
+
+
+
+
+
+/*------------------------------------**
+  $PRE HEADER
+**------------------------------------*/
+
+.pre-header {
+  height: 60px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: #fff;
+
+  a.qg-logo {
+    svg {
+      height: 35.78px;
+      width: 208px;
+    }
+  }
+}
+
+@include media(">medium") {
+
+  .pre-header {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 3;
+  }
+}
+
+
+
+
+
+/*------------------------------------**
+  $PRE HEADER - NO HERO VARIATION
+**------------------------------------*/
+
+/* for use on pages without hero videos */
+
+.pre-header--no-hero {
+  border-bottom: 1px solid $text-light;
+}
+
+
+
+
+
+/*------------------------------------**
+  $HEADER
+**------------------------------------*/
+
+header {
+  @include transition(all);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  border-top: 1px solid $black;
+  padding: 1.3rem 0;
+  width: 100%;
+  background-color: $white;
+
+  .container {
+    display: flex;
+    align-items: center;
+  }
+
+}
+
+@include media(">medium") {
+
+  header {
+    top: 0px;
+    bottom: auto;
+    border-top: none;
+    border-bottom: 1px solid $text-light;
+    height: 100px;
+    padding: 3rem 0;
+  }
+
+}
+
+/* logo */
+
+.logo {
+  order: 0;
+  display: block;
+  margin-bottom: auto;
+  margin-top: auto;
+  margin-right: auto;
+
+  &:hover {
+    background-color: $accent;
+  }
+
+}
+
+@include media(">medium") {
+
+  .logo svg {
+    height: 31px;
+    width: 200px;
+  }
+
+}
+
+@include media(">large") {
+
+  /* logo */
+
+  .logo svg {
+    height: 39px;
+    width: 250px;
+  }
+
+}
+
+/* nav */
+
+nav {
+  @include transition(all);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 60px;
+  order: 1;
+  width: 75%;
+  background-color: rgba($black,0.8);
+  overflow-y: auto;
+  overflow-x: hidden;
+  opacity: 0;
+  transform: translateX(100%);
+  visibility: hidden;
+
+  a {
+    @include font-size(20);
+    @include line-height(24);
+    @include transition(transform);
+    position: relative;
+    display: block;
+    padding: 2rem 6rem 2rem 2rem;
+    color: $white;
+    font-weight: $bold;
+    text-align: right;
+    text-decoration: none;
+    transform: translateX(0);
+
+    &:hover {
+      background-color: rgba($black,0.8);
+      text-decoration: underline;
+    }
+
+    &:after {
+      position: absolute;
+      top: 50%;
+      right: 1.5rem;
+      display: block;
+      height: 36px;
+      width: 36px;
+      background-image: url('../images/icon--arrow-right-white.svg');
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: 100%;
+      content: '';
+      transform: translateY(-50%);
+    }
+
+  }
+
+}
+
+/* secondary nav level (small screens only) */
+
+nav {
+
+  ul ul {
+    @include transition(transform);
+    transform: translateX(100%);
+
+    /* hide links from being accessed via keyboard */
+    li {
+      visibility: hidden;
+    }
+
+  }
+
+  ul > li ul {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 60px;
+    z-index: 1;
+    width: 100%;
+  }
+
+  ul ul li a {
+    padding-right: 2rem;
+  }
+
+  ul ul li a:after {
+    display: none;
+  }
+
+  ul ul li:first-child a {
+    text-decoration: underline;
+  }
+
+  ul ul li:not(:first-child) a {
+    font-weight: normal;
+  }
+
+  ul ul li:last-child {
+    text-align: right;
+    margin: 2rem;
+  }
+
+  ul ul button.button--left-arrow {
+    display: inline-block;
+    padding-left: 6rem;
+    width: auto;
+  }
+
+}
+
+.menu-open nav {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+nav ul ul.secondary-lvl-open {
+  transform: translateX(0);
+
+  /* allow links to be accessed via keyboard */
+  li {
+    visibility: visible;
+  }
+
+}
+
+@include media("<=medium") {
+
+  .menu-secondary-lvl-open nav > ul > li > a {
+    transform: translateX(110%);
+    /* hide links from being accessed via keyboard */
+    visibility: hidden;
+  }
+
+}
+
+@include media(">medium") {
+
+  nav {
+    position: static;
+    display: block;
+    width: 100%;
+    flex: 1 0 0%;
+    overflow: visible;
+    background-color: transparent;
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+
+    ul {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      margin-left: 2rem;
+      margin-right: 2rem;
+    }
+
+    ul ul {
+      display: none;
+    }
+
+    a {
+      @include font-size(18);
+      @include line-height(22);
+      padding: 0.4rem 1rem;
+      color: $text;
+      background-color: transparent;
+
+      &:hover {
+        background-color: $accent;
+      }
+
+      &.active {
+        text-decoration: underline;
+      }
+
+      &:after {
+        content: none;
+      }
+
+    }
+
+  }
+
+  .invisible-nav-close {
+    display: none;
+  }
+
+}
+
+@include media(">large") {
+
+  /* nav */
+
+  nav {
+
+    ul {
+      margin-left: 8rem;
+      margin-right: 8rem;
+    }
+
+    a {
+      @include font-size(20);
+      @include line-height(24);
+      padding: 0.7rem 1rem;
+    }
+
+  }
+
+}
+
+/* triggers */
+
+.menu-trigger,
+.search-trigger {
+  order: 2;
+  flex-basis: 40px;
+  line-height: 0;
+  margin-left: 1.2rem;
+  padding: 0.5rem;
+  background-color: transparent;
+
+  .icon--close {
+    display: none;
+  }
+
+}
+
+.invisible-menu-close {
+  position: fixed;
+  left: 0;
+  bottom: 60px;
+  display: none;
+  height: 100%;
+  width: 25%;
+  opacity: 0;
+}
+
+
+.menu-open {
+
+  .invisible-menu-close {
+    display: block;
+  }
+
+  .menu-trigger .icon--close {
+    display: block;
+  }
+
+  .menu-trigger .icon--menu {
+    display: none;
+  }
+
+}
+
+.search-open .search-trigger {
+
+  .icon--close {
+    display: block;
+  }
+
+  .icon--search {
+    display: none;
+  }
+
+}
+
+@include media(">small") {
+
+  .menu-trigger,
+  .search-trigger {
+
+    &:hover {
+      cursor: pointer;
+      background-color: $accent;
+    }
+
+  }
+
+}
+
+@include media(">medium") {
+
+  .menu-open .invisible-menu-close {
+    display: none;
+  }
+
+  .search-trigger {
+    margin-left: 0;
+  }
+
+  .menu-trigger {
+    display: none;
+  }
+
+}
+
+
+
+
+
+/*------------------------------------**
+  $HEADER TRANSPARENT VARIATION
+**------------------------------------*/
+
+@include media(">medium") {
+
+  header.header--transparent {
+    top: 60px;
+    background-color: transparent;
+    border-bottom: 0;
+
+    .logo:hover,
+    .search-trigger:hover,
+    nav a:hover {
+      background-color: rgba(#fff,0.5);
+    }
+
+  }
+
+  header.header--transparent.header--transparent-light {
+
+    .logo svg * {
+      fill: #fff;
+    }
+
+    button svg {
+      fill: #fff;
+    }
+
+    nav a {
+      color: #fff;
+    }
+
+    .logo:hover,
+    button:hover,
+    nav a:hover {
+      background-color: rgba(#000,0.3);
+    }
+
+  }
+
+}
+
+
+
+
+
+/*------------------------------------**
+  $HEADER NO HERO VARIATION
+**------------------------------------*/
+
+/* For use on pages without a hero image */
+
+header.header--no-hero {
+  border-bottom: 1px solid $text-light;
+  background-color: #fff;
+}
+
+@include media(">medium") {
+
+  header.header--no-hero {
+
+    .logo:hover,
+    .search-trigger:hover,
+    nav a:hover {
+      background-color: $accent;
+    }
+
+  }
+
+}
+
+
+
+
+
+/*------------------------------------**
+  $MAIN
+**------------------------------------*/
+
+/**
+ * Progressive enhancement at work here, by default the layout uses flexbox
+ * but if the browser supports CSS Grids, it uses the flexbox styles and also
+ * adds on CSS grid styles.
+ */
+
+/* Default styles (small screens + colors etc) */
+
+main {
+  display: block;
+  overflow-x: hidden;
+}
+
+section {
+  margin-top: 20rem;
+  padding-top: $gutter;
+  padding-bottom: $gutter;
+  background-color: $white;
+
+}
+
+.section--left__content,
+.section--left__sidebar,
+.section--right__content,
+.section--right__sidebar,
+.section--left__full-width,
+.section--right__full-width {
+  margin-bottom: $gutter;
+}
+
+/* Previous/next section */
+
+.section--previous-next {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid $black;
+  background-color: $white;
+  padding: 0 0 5rem 0;
+
+  > a {
+    display: block;
+    transform: translateY(-50%);
+    width: 100%;
+
+    &:first-child {
+      margin-right: 1rem;
+    }
+
+    &:last-child {
+      margin-left: 1rem;
+    }
+
+  }
+
+}
+
+.section--previous-next__single {
+  border-top: 0;
+  justify-content: center;
+}
+
+/* This fixes right-aligned section order on small screens. Default content
+ * order puts the sidebar directly beneath the heading. This puts the first set
+ * of content beneath the heading instead. (Subsequent divs will appear in
+ * default order).
+ */
+
+@include media("<=medium") {
+
+  .section--right {
+    display: flex;
+    flex-direction: column;
+
+    h2:first-of-type {
+      order: 0;
+    }
+
+    .section--right__content:nth-child(3) {
+      order: 1;
+    }
+
+    .section--right__sidebar,
+    .section--right__content,
+    .section--right__full-width {
+      order: 2;
+      margin-bottom: $gutter;
+    }
+
+  }
+
+}
+
+@include media(">extra-small") {
+
+  /* Previous-next section */
+
+  .section--previous-next {
+
+    > a {
+      min-width: 150px;
+      width: auto;
+    }
+
+  }
+
+}
+
+@include media(">small") {
+
+  /* Previous-next section */
+
+  .section--previous-next {
+
+    > a {
+      min-width: 260px;
+    }
+
+  }
+
+}
+
+/* Flexbox default layout on medium sizes & up */
+
+@include media(">medium") {
+
+  main {
+    overflow-x: initial;
+  }
+
+  section {
+    margin-top: 30rem;
+    background-color: transparent;
+  }
+
+  .section--left__content,
+  .section--left__sidebar,
+  .section--left__full-width,
+  .section--right__content,
+  .section--right__sidebar,
+  .section--right__full-width {
+    margin-bottom: calc(#{$gutter} / 2);
+  }
+
+  /* section that spans 8 columns */
+
+  .section--center {
+    margin-left: auto;
+    margin-right: auto;
+    width: 66.6667%;
+    background-color: $white;
+  }
+
+  /* Left-aligned section that spans 9 columns */
+
+  .section--left {
+    display: flex;
+    flex-wrap: wrap;
+    width: 75%;
+
+    /* Heading & content spans 6 columns */
+
+    h2 {
+      margin-bottom: calc(3rem - (#{$gutter} / 2));
+      width: 66.667%;
+    }
+
+    .section--left__content {
+      margin-right: calc(#{$gutter} / 2);
+      width: calc(66.667% - #{$gutter / 2};
+    }
+
+    /* Sidebar spans 3 columns */
+
+    .section--left__sidebar {
+      margin-left: calc(#{$gutter} / 2);
+      width: calc(33.3333% - #{$gutter / 2};
+    }
+
+    /* Full width spans 9 columns */
+
+    .section--left__full-width {
+      width: 100%;
+    }
+
+  }
+
+  /* Right-aligned section that spans 9 columns */
+
+  .section--right {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: auto;
+    width: 75%;
+
+    /* Sidebar spans 3 columns */
+
+    .section--right__sidebar {
+      margin-right: calc(#{$gutter} / 2);
+      width: calc(33.3333% - #{$gutter} / 2);
+    }
+
+    /* Heading & content spans 6 columns */
+
+    h2 {
+      margin-bottom: calc(3rem - (#{$gutter} / 2));
+      margin-left: 33.3333%;
+      padding-left: calc(#{$gutter} / 2);
+      width: 66.667%;
+    }
+
+    .section--right__content {
+      margin-left: calc(#{$gutter} / 2);
+      width: calc(66.667% - #{$gutter / 2};
+    }
+
+    /* Full-width spans 9 columns */
+
+    .section--right__full-width {
+      width: 100%;
+    }
+
+  }
+
+  /* Previous next section */
+  .section--previous-next {
+    padding-bottom: 10rem;
+  }
+
+}
+
+/* CSS grid layout on medium sizes & up for lucky browsers that support it */
+
+@supports (display: grid) {
+
+  @include media(">medium") {
+
+    /* undo some flexbox styles */
+
+    .section-center,
+    .section--left,
+    .section--right,
+    .section--left .section--left__content,
+    .section--left .section--left__sidebar,
+    .section--left .section--left__full-width,
+    .section--right .section--right__content,
+    .section--right .section--right__sidebar,
+    .section--right .section--right__full-width {
+      display: block;
+      margin-bottom: 0;
+      margin-left: 0;
+      margin-right: 0;
+      width: auto;
+    }
+
+    /* and go */
+
+    /* main section is a 12 column grid */
+
+    main,
+    .section--transcript {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-gap: $gutter;
+    }
+
+    /* centered section that spans 8 columns */
+
+    .section--center {
+      grid-column: 3 / span 8;
+      width: auto;
+    }
+
+    /* Left-aligned section that spans 9 columns */
+
+    .section--left {
+      grid-column: 1 / span 9;
+      width: auto;
+    }
+
+    /* Left-aligned section is also a 9 column grid */
+
+    .section--left {
+      display: grid;
+      grid-template-columns: repeat(9,1fr);
+      grid-column-gap: $gutter;
+      grid-row-gap: $gutter / 2;
+
+      /* Heading & content spans 6 columns */
+
+      h2,
+      .section--left__content {
+        grid-column: 1 / span 6;
+      }
+
+      /* Moves the headings bottom border line to touch the grid's center */
+
+      h2 {
+        width: calc(100% + (#{$gutter} / 2));
+      }
+
+      /* Sidebar spans 3 columns */
+
+      .section--left__sidebar {
+        grid-column: 7 / span 3;
+      }
+
+      /* Full-width spans 9 columns */
+
+      .section--left__full-width {
+        grid-column: 1 / span 9;
+      }
+
+    }
+
+    /* Right-aligned section that spans 9 columns */
+
+    .section--right {
+      grid-column: 4 / span 9;
+    }
+
+    /* Right-aligned section is also a 9 column grid */
+
+    .section--right {
+      display: grid;
+      grid-template-columns: repeat(9,1fr);
+      grid-column-gap: $gutter;
+      grid-row-gap: $gutter / 2;
+
+      /* Sidebar spans 3 columns */
+
+      .section--right__sidebar {
+        grid-column: 1 / span 3;
+      }
+
+      /* Heading & content spans 6 columns */
+
+      h2,
+      .section--right__content {
+        grid-column: 4 / span 6;
+      }
+
+      /* Full-width spans 9 columns */
+
+      .section--right__full-width {
+        grid-column: 1 / span 9;
+      }
+
+      /* Moves the headings bottom border line to touch the grid's center */
+
+      h2 {
+        margin-left: calc(#{-$gutter} / 2);
+        padding-left: calc(#{$gutter} / 2);
+        width: calc(100% + (#{$gutter} / 2));
+      }
+
+    }
+
+    /* Previous/next section */
+
+    .section--previous-next {
+      grid-column: span 12;
+    }
+
+  }
+
+}
+
+
+
+
+
+/*------------------------------------**
+  $PREFOOTER
+**------------------------------------*/
+
+.pre-footer {
+  padding-top: 4rem;
+  padding-bottom: 5rem;
+  background-image: url('../images/bg-prefooter.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  color: $white;
+
+  .flexbox > a {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+
+}
+
+@include media(">medium") {
+
+  .pre-footer {
+    padding-top: 5rem;
+    padding-bottom: 7rem;
+  }
+
+}
+
+
+
+
+
+/*------------------------------------**
+  $FOOTER
+**------------------------------------*/
+
+footer {
+  padding-top: 2rem;
+  /* menu height + normal padding */
+  padding-bottom: calc(60px + 5rem);
+  background-color: $white;
+  color: $text-grey;
+
+  li,
+  p {
+    @include font-size(12);
+    @include line-height(15);
+  }
+
+  .flexbox > li {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  li a {
+    padding: 1px 4px 4px 4px;
+    color: $text-grey;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: $text;
+      background-color: $accent;
+      text-decoration: underline;
+    }
+
+  }
+
+}
+
+@include media(">medium") {
+
+  footer {
+    padding-top: 5rem;
+    padding-bottom: 7rem;
+  }
+
+}

@@ -1,0 +1,451 @@
+/**
+ * TYPOGRAPHY
+ * Table of contents: Navigate using $TITLE
+ *
+ * font imports
+ * globals
+ * headings
+ * body (paragraphs, etc)
+ *
+ */
+
+
+
+
+
+/*------------------------------------**
+  $FONT IMPORTS
+**------------------------------------*/
+
+@font-face {
+  font-family: 'Meta';
+  src: url('../fonts/meta-normal.eot');
+  src: url('../fonts/meta-normal.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/meta-normal.woff2') format('woff2'),
+  url('../fonts/meta-normal.woff') format('woff'),
+  url('../fonts/meta-normal.ttf')  format('truetype'),
+  url('../fonts/meta-normal.svg#meta-normal') format('svg');
+  font-weight:  400;
+  font-style:   normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'Meta';
+  src: url('../fonts/meta-bold.eot');
+  src: url('../fonts/meta-bold?#iefix') format('embedded-opentype'),
+  url('../fonts/meta-bold.woff2') format('woff2'),
+  url('../fonts/meta-bold.woff') format('woff'),
+  url('../fonts/meta-bold.ttf')  format('truetype'),
+  url('../fonts/meta-bold.svg#bold') format('svg');
+  font-weight:  700;
+  font-style:   normal;
+  font-stretch: normal;
+}
+
+
+
+
+
+/*------------------------------------**
+  $GLOBALS
+**------------------------------------*/
+
+html {
+  color: $text;
+  font-size: 62.5%; /* Sets up the Base 10 stuff */
+  font-family: $font;
+}
+
+body {
+  @include transition(font-family);
+  @include font-size(16);
+  color: $text;
+  line-height: 1.286em;
+  font-weight: $book;
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6,
+p,
+ul,
+ol,
+li {
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+
+
+
+
+/*------------------------------------**
+  $HEADINGS
+**------------------------------------*/
+
+/* Global headings */
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4 {
+  font-weight: $bold;
+}
+
+h1,
+.h1,
+h2,
+.h2 {
+
+  &:after {
+    display: block;
+    height: 1rem;
+    margin-top: $gutter;
+    width: 100px;
+    background-color: $accent;
+    content: '';
+  }
+
+  .subtitle {
+    @include font-size(24);
+    @include line-height(29);
+    margin-top: $gutter;
+  }
+
+}
+
+h2,
+.h2 {
+
+  &:after {
+    height: 1rem;
+    margin-top: 1rem;
+  }
+
+}
+
+/* Heading one */
+
+h1,
+.h1 {
+  @include font-size(50);
+  @include line-height(45);
+  margin-bottom: 4.6rem;
+  text-align: center;
+
+  &:after {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+}
+
+/* Heading two */
+
+h2,
+.h2 {
+  @include font-size(40);
+  @include line-height(49);
+  margin-bottom: 3.2rem;
+}
+
+@include media(">medium") {
+  h2,
+  .h2 {
+    border-bottom: 1px solid #000;
+  }
+}
+
+/* Heading three */
+
+h3,
+.h3 {
+  @include font-size(24);
+  @include line-height(29);
+  margin-bottom: 1.4rem;
+}
+
+p + h3,
+p + .h3 {
+  margin-top: 2.4rem;
+}
+
+/* Heading four */
+
+h4,
+.h4 {
+  @include font-size(20);
+  @include line-height(24);
+  margin-bottom: 1.4rem;
+}
+
+p + h4,
+p + .h4 {
+  margin-top: 2.0rem;
+}
+
+/* Heading five + six */
+
+h5,
+.h5,
+h6,
+.h6 {
+  @include font-size(18);
+  @include line-height(22);
+  margin-bottom: 1.4rem;
+}
+
+p + h5,
+p + .h5,
+p + h6,
+p + .h6 {
+  margin-top: 1.8rem;
+}
+
+
+
+
+
+/*------------------------------------**
+  $BODY (PARAGRAPHS, ETC)
+**------------------------------------*/
+
+/* paragraphs */
+
+p {
+  @include font-size(16);
+  @include line-height(26);
+  margin-bottom: 1.2rem;
+}
+
+.p--large {
+  @include font-size(18);
+  @include line-height(30);
+  margin-bottom: 1.4rem;
+}
+
+/* global lists */
+
+main {
+
+  ul,
+  ol {
+    margin-bottom: 1.2rem;
+    padding-left: 1rem;
+  }
+
+  ul ul,
+  ul ol,
+  ol ul,
+  ol ol {
+    margin-bottom: 0.6rem;
+    margin-left: 30px;
+  }
+
+  li {
+    @include font-size(16);
+    @include line-height(26);
+    margin-bottom: 0.6rem;
+    padding-left: 2rem;
+  }
+
+  /* unordered list bullets */
+
+  ul > li:before {
+    display: inline-block;
+    height: 5px;
+    margin-left: -1.8rem;
+    margin-right: 1rem;
+    width: 5px;
+    border-radius: 50%;
+    background-color: $text;
+    content: '';
+    transform: translateY(-50%);
+  }
+
+  ul ul > li:before {
+    border-radius: 0;
+    height: 2px;
+    width: 4px;
+    transform: translateY(-0.4rem);
+  }
+
+  /* ordered list bullets */
+
+  ol {
+    counter-reset: count;
+  }
+
+  ol > li:before {
+    display: inline-block;
+    margin-right: 10px;
+    font-weight: $bold;
+    content: counter(count);
+    counter-increment: count;
+  }
+
+}
+
+/* small */
+
+small,
+.small {
+  @include font-size(16);
+  @include line-height(26);
+  color: $text-light;
+}
+
+/* links */
+
+a {
+  @include transition(background-color);
+  line-height: 0;
+}
+
+main {
+
+  a {
+    padding: 1px 4px 4px 4px;
+    background-color: $accent;
+    color: $text;
+    word-wrap: break-word;
+
+    &:hover,
+    &:active {
+      color: $text;
+      background-color: $accent-dark;
+    }
+
+  }
+
+}
+
+/* highlight */
+
+.highlight {
+  padding: 1px 4px 2px 4px;
+  background-color: $accent;
+}
+
+/* accent */
+
+.accent {
+  color: $accent;
+}
+
+/* strong */
+
+strong {
+  font-weight: $bold;
+}
+
+/* blockquote */
+
+blockquote,
+.blockquote {
+  @include font-size(24);
+  @include line-height(36);
+  position: relative;
+  /* margin bottom = usual margin + height of citation */
+  margin-bottom: calc(2.4rem + 3.6rem);
+  padding-left: 20px;
+  padding-top: 18px;
+  font-weight: $bold;
+
+  p,
+  div {
+    @include font-size(24);
+    @include line-height(29);
+    display: inline;
+  }
+
+  /* orange top border AND the starting quote */
+
+  &:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top: 10px solid $accent;
+    display: block;
+    padding-top: 10px;
+    width: 100px;
+    height: 10px;
+    content: '\201C';
+  }
+
+  /* ending quote */
+
+  &:after {
+    position: absolute;
+    display: inline;
+    padding-left: 8px;
+    content: '\201D';
+  }
+
+  /* citation */
+
+  small {
+    position: absolute;
+    left: 20px;
+    bottom: -10px;
+    font-weight: $book;
+    transform: translateY(100%);
+  }
+
+}
+
+.lightbox + blockquote,
+.lightbox + .blockquote {
+  margin-top: $gutter;
+}
+
+@include media("<=medium") {
+
+  blockquote:before,
+  .blockquote:before {
+    border-top: 0;
+  }
+
+}
+
+/* blockquote (variation: no citation) */
+
+.blockquote--no-citation {
+  margin-bottom: 2.4rem;
+}
+
+/* center */
+
+.center {
+  text-align: center;
+}
+
+/* hr */
+
+hr {
+  border: none;
+  height: 1px;
+  margin-top: $gutter;
+  margin-bottom: $gutter;
+  background-color: #000;
+
+  &.invisible {
+    background-color: $white;
+  }
+
+}

@@ -1,0 +1,31 @@
+/*------------------------------------**
+  $VENDOR
+**------------------------------------*/
+
+@import "vendor/_reset.scss";
+@import "vendor/_include-media.scss";
+
+
+
+
+
+/*------------------------------------**
+  $GLOBALS
+**------------------------------------*/
+
+@import "partials/_variables.scss";
+@import "partials/_mixins.scss";
+@import "partials/_typography.scss";
+@import "partials/_layout.scss";
+
+
+
+
+
+/*------------------------------------**
+  $OTHERS
+**------------------------------------*/
+
+@import "partials/_forms.scss";
+@import "partials/_elements.scss";
+@import "partials/_print.scss";
