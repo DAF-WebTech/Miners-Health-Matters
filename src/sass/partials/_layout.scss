@@ -73,6 +73,14 @@ svg * {
   outline: 3px solid $accent;
 }
 
+a.qg-logo {
+  svg {
+    height: 35.78px;
+    width: 208px;
+  }
+}
+
+
 /* allows fixed header to work on anchor links */
 
 .anchor {
@@ -96,13 +104,6 @@ svg * {
   padding-top: 1rem;
   padding-bottom: 1rem;
   background-color: #fff;
-
-  a.qg-logo {
-    svg {
-      height: 35.78px;
-      width: 208px;
-    }
-  }
 }
 
 @include media(">medium") {
@@ -141,11 +142,11 @@ svg * {
 header {
   @include transition(all);
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
   right: 0;
   z-index: 5;
-  border-top: 1px solid $black;
+  border-bottom: 1px solid $black;
   padding: 1.3rem 0;
   width: 100%;
   background-color: $white;
@@ -155,6 +156,10 @@ header {
     align-items: center;
   }
 
+  .logo svg {
+    width: 200px;
+    height: 31.16px;
+  }
 }
 
 @include media(">medium") {
@@ -171,6 +176,9 @@ header {
 }
 
 /* logo */
+svg {
+    fill: $black;
+}
 
 .logo {
   order: 0;
@@ -841,8 +849,7 @@ section {
 
     /* main section is a 12 column grid */
 
-    main,
-    .section--transcript {
+    main {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
       grid-gap: $gutter;

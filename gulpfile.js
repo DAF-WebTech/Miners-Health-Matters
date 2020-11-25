@@ -15,6 +15,8 @@ var autoprefixerOptions = {
 
 /* js stuff */
 var babel = require('gulp-babel');
+var uglify = require('gulp-uglify');
+var gulpIf = require('gulp-if');
 var jsInput = 'src/js/*.js';
 var jsOutput = 'dist/js';
 
@@ -38,6 +40,7 @@ gulp.task('sass', function() {
 /* babel */
 gulp.task('js', function() {
 	return gulp.src(jsInput)
+  .pipe(gulpIf('*.js', uglify()))
 	.pipe(babel({
 		presets: [
       ["env", {

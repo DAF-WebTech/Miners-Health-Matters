@@ -7,6 +7,7 @@
  * accordion
  * button
  * search box
+ * in-page search box
  * video section
  * flexbox
  * lightbox img
@@ -638,11 +639,10 @@ input[type=submit].button--large {
 **------------------------------------*/
 
 .search-box {
-  position: fixed;
-  bottom: 60px;
-  left: 0;
-  right: 0;
   top: 0;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  position: fixed;
   z-index: 4;
   height: 100%;
   width: 100%;
@@ -653,9 +653,8 @@ input[type=submit].button--large {
   visibility: hidden;
 
   .container {
-    position: fixed;
-    bottom: 60px;
-    margin-top: 3rem;
+    position: relative;
+    margin-top: 10rem;
     padding: 0;
     background-color: $white;
   }
@@ -711,8 +710,8 @@ input[type=submit].button--large {
     @include line-height(16);
     position: absolute;
     right: 0;
-    bottom: 100%;
-    margin-bottom: 1rem;
+    bottom: auto;
+    margin-top: 1rem;
     width: 6rem;
     white-space: normal;
     background-color: transparent;
@@ -725,7 +724,6 @@ input[type=submit].button--large {
 
   }
 
-
 }
 
 .search-open .search-box {
@@ -735,33 +733,52 @@ input[type=submit].button--large {
 }
 
 @include media(">medium") {
-
   .search-box {
-    bottom: 0;
-    top: 100px;
-    padding-left: 2rem;
-    padding-right: 2rem;
-
     .container {
-      position: relative;
-      bottom: 0;
+      margin-top: 14rem;
     }
-
-    label {
-      left: 0;
-    }
-
-    input[type="reset"] {
-      bottom: auto;
-      margin-bottom: 0;
-      margin-top: 1rem;
-    }
-
   }
-
 }
 
+/*------------------------------------**
+  $IN-PAGE SEARCH BOX & RESULTS
+**------------------------------------*/
 
+form.search {
+  display: flex;
+}
+#search-result-count {
+  padding-bottom: $gutter;
+}
+#search-results {
+  margin: 0;
+  padding: 0;
+
+  .result {
+    padding: $gutter 0;
+
+    &::before {
+      display: none;
+    }
+
+    .date {
+      margin-bottom: 0;
+      font-size: 14px;
+      line-height: 14px;
+      color: $text-grey;
+    }
+
+    cite {
+      font-size: 14px;
+      line-height: 14px;
+      color: $accent;
+    }
+  }
+}
+
+.pagination.search {
+  text-align: center;
+}
 
 
 
@@ -774,16 +791,13 @@ input[type=submit].button--large {
 
 .section--video {
   position: relative;
+  height: 390px;
   margin-top: 0;
   padding: 0;
   background-image: url('../images/bigbg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-
-  &.section--video--what-is-cwp {
-    background-image: url('../images/video-hero2.jpg');
-  }
 
 
   /* Video wrapper
@@ -803,24 +817,20 @@ input[type=submit].button--large {
     padding: 0;
   }
 
-  iframe {
-    @include transition(opacity);
-    height: 300px;
-    max-width: 100%;
-    opacity: 0;
-    visibility: hidden;
-  }
+  //iframe {
+  //  @include transition(opacity);
+  //  height: 300px;
+  //  max-width: 100%;
+  //  opacity: 0;
+  //  visibility: hidden;
+  //}
 
 }
 
 @include media(">small") {
 
   .section--video {
-
-    iframe {
-      height: 500px;
-    }
-
+    height: 590px;
   }
 
 }
@@ -829,13 +839,10 @@ input[type=submit].button--large {
 
   .section--video {
     padding-top: 100px;
+    height: 900px;
 
     .section--video__wrapper {
       padding-top: 4rem;
-    }
-
-    iframe {
-      height: 670px;
     }
 
   }
@@ -957,135 +964,13 @@ input[type=submit].button--large {
 
 }
 
-/* Transcript - trigger */
-
-.section--video__transcript-trigger {
-  margin-top: 4rem;
-  visibility: hidden;
-  opacity: 0;
-
-  a {
-    @include line-height(26);
-    display: inline-block;
-    padding: 1px 4px 1px 4px;
-    color: $text;
-    font-weight: $bold;
-    text-decoration: none;
-  }
-
-  a:hover {
-    background-color: $accent;
-  }
-
-  .close {
-    display: none;
-  }
-
-}
-
-/* Transcript - section */
-
-.section--transcript {
-  @include transition(all);
-  background-color: transparent;
-  visibility: hidden;
-  opacity: 0;
-  height: 0;
-
-  section:first-of-type {
-    margin-top: 10rem;
-  }
-
-  &:after {
-    border-top: 1px solid #000;
-    grid-column: span 12;
-    display: block;
-    height: 5rem;
-    margin-top: 10rem;
-    width: 100%;
-    background-color: #fff;
-    content: '';
-  }
-
-}
-
-/* State: transcript open */
-
-.transcript-open {
-
-  .open {
-    display: none;
-  }
-
-  .close {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .section--transcript {
-    visibility: visible;
-    opacity: 1;
-    height: auto;
-  }
-
-}
-
-@include media(">medium") {
-
-  .section--transcript {
-
-    section:first-of-type {
-      margin-top: 15rem;
-    }
-
-    &:after {
-      height: 7.5rem;
-      margin-top: 15rem;
-    }
-
-  }
-
-}
-
-/* State: video triggered */
-
-.video-open .section--video {
-
-  .section--video__wrapper {
-    background-color: #fff;
-  }
-
-  iframe {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .section--video__video-trigger,
-  .homepage-feature {
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  .section--video__transcript-trigger {
-    opacity: 1;
-    visibility: visible;
-  }
-
-}
-
-@include media(">medium") {
-
-  .video-open .section--video__scroll-down svg {
-    height: 50px;
-    width: 50px;
-  }
-
-}
-
 /* Video - Homepage variation */
 
 .section--video--homepage {
+
+  svg {
+    fill: $white;
+  }
 
   .section--video__video-trigger {
     top: 7rem;
@@ -1094,15 +979,9 @@ input[type=submit].button--large {
 }
 
 .homepage-feature__logo {
-  position: absolute;
-  top: 5rem;
-  left: 2rem;
-  right: 2rem;
-
-  svg {
-    max-width: 100%;
-  }
-
+  padding-top: 8rem;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 @include media(">small") {
@@ -1110,13 +989,13 @@ input[type=submit].button--large {
   .section--video--homepage {
 
     .section--video__video-trigger {
-      top: 13rem;
+      padding-top: 13rem;
     }
 
   }
 
   .homepage-feature__logo {
-    top: 15rem;
+    padding-top: 15rem;
   }
 
 }
@@ -1125,13 +1004,14 @@ input[type=submit].button--large {
   .section--video--homepage {
 
     .section--video__video-trigger {
-      top: 28rem;
+      padding-top: 28rem;
     }
 
   }
 
   .homepage-feature__logo {
-    top: 14rem;
+    padding-top: 14rem;
+    margin: 0 auto;
   }
 
 }

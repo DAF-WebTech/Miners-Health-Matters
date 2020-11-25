@@ -7,7 +7,7 @@
  * handle header
  * menu trigger
  * search trigger
- * handle video
+ * search pagination
  * tidy responsive tables
  * accordions
  * handle lightboxes
@@ -154,40 +154,15 @@ function toggleSearch() {
 
 
 
-
 /*------------------------------------**
- $HANDLE VIDEO
+ $SEARCH PAGINATION
+ Replaces the default search pagination with text to continue the search on DNRME.
+ If we're able to get multiple flt files for the one Funnelback collection, this will no longer be necessary.
  **------------------------------------*/
 
-var videoTrigger = document.querySelector('.js-video-trigger');
-var transcriptTrigger = document.querySelector('.js-transcript-trigger');
-var iframe = document.querySelector('iframe');
+var searchNext = $('.pagination.search [rel="next"]').attr('href');
 
-if(iframe != null) {
-    var player = new Vimeo.Player(iframe);
-}
-
-function handleVideo() {
-    body.classList.add('video-open');
-    header.classList.remove('header--transparent');
-
-    if(iframe != null) {
-        player.play();
-    }
-}
-
-function toggleTranscript(e) {
-
-    if (body.classList.contains('transcript-open')) {
-        e.preventDefault();
-    }
-
-    body.classList.toggle('transcript-open');
-
-}
-
-
-
+$('.pagination.search').replaceWith('<p><a href="' + searchNext + '" class="button button--right-arrow">Continue this search on the Department of Natural Resources, Mines and Energy website.</a></p>');
 
 
 /*------------------------------------**
@@ -199,7 +174,7 @@ var header = document.querySelector('.js-header');
 
 function handleHeader() {
 
-    if(!body.classList.contains('video-open') && !body.classList.contains('search-open')) {
+    if(!body.classList.contains('fancybox-active') && !body.classList.contains('search-open')) {
 
         if(window.pageYOffset > preHeader.offsetHeight) {
             header.classList.remove('header--transparent');
@@ -410,11 +385,3 @@ window.addEventListener('keyup', handleSkipLinks);
 menuTrigger.addEventListener('click', toggleMenu);
 invisibleMenuClose.addEventListener('click', toggleMenu);
 searchTrigger.addEventListener('click', toggleSearch);
-
-if(videoTrigger != null) {
-    videoTrigger.addEventListener('click', handleVideo);
-}
-
-if(transcriptTrigger != null) {
-    transcriptTrigger.addEventListener('click',toggleTranscript);
-}
